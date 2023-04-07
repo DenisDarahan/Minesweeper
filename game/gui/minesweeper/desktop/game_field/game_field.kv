@@ -17,6 +17,14 @@
 
             GridLayout:
                 id: mine_field
+
+                canvas.before:
+                    Color:
+                        rgba: 0.52, 0.52, 0.52, 1
+                    Line:
+                        width: dp(2)
+                        points: self.x, self.y, self.width, self.height
+
                 size_hint: None, None
                 size:
                     (self.cols or 0) * (self.children[0].width if self.children else dp(0)), \

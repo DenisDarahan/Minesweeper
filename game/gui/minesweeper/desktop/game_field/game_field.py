@@ -36,4 +36,5 @@ class GameField(FadingLayout):
                     cell_button.display_cell_value(cell_button.cell.value)
 
     def end_game(self):
-        self.build_game()
+        # self.build_game()
+        pass

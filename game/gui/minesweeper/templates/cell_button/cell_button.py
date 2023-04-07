@@ -1,6 +1,7 @@
+import math
+
 from kivy.uix.boxlayout import BoxLayout
-# from kivy.uix.recycleview import RecycleView, views
-from kivy.graphics import Color, Rectangle, Line
+from kivy.graphics import Color, Rectangle, Line, RoundedRectangle
 from kivy.input.motionevent import MotionEvent
 from kivy.properties import NumericProperty
 from kivy.metrics import dp
@@ -31,9 +32,50 @@ class CellButton(DefaultButton, LongPressButton):
 
     def display_mine(self):
         self.canvas.before.clear()
+
         with self.canvas.before:
+            Color(rgba=(0.52, 0.52, 0.52, 1))
+            Line(width=dp(1), rectangle=(self.x, self.y, self.width, self.height))
             Color(rgba=(1, 0, 0, 1))
-            Rectangle(size=self.size, pos=self.pos)
+            Rectangle(size=(self.width + dp(2), self.height), pos=(self.x + dp(1), self.y - dp(1)))
+            Color(rgba=(0, 0, 0, 1))
+            Line(
+                width=dp(1),
+                cap='square',
+                points=(self.x + self.width / 2, self.y + self.height * 0.15,
+                        self.x + self.width / 2, self.y + self.height * 0.85)
+            )
+            Line(
+                width=dp(1),
+                cap='square',
+                points=(self.x + self.width * 0.15, self.y + self.height / 2,
+                        self.x + self.width * 0.85, self.y + self.height / 2)
+            )
+            Line(
+                width=dp(1),
+                cap='square',
+                points=(
+                    self.x + 0.7 * self.height / (2 * math.sqrt(2)),
+                    self.y + 0.7 * self.width / (2 * math.sqrt(2)),
+                    self.x + self.width - 0.7 * self.height / (2 * math.sqrt(2)),
+                    self.y + self.height - 0.7 * self.width / (2 * math.sqrt(2))
+                )
+            )
+            Line(
+                width=dp(1),
+                cap='square',
+                points=(
+                    self.x + 0.7 * self.height / (2 * math.sqrt(2)),
+                    self.y + self.height - 0.7 * self.width / (2 * math.sqrt(2)),
+                    self.x + self.width - 0.7 * self.height / (2 * math.sqrt(2)),
+                    self.y + 0.7 * self.width / (2 * math.sqrt(2))
+                )
+            )
+            RoundedRectangle(
+                size=(self.width * 0.6, self.height * 0.6),
+                pos=(self.x + self.width * 0.2, self.y + self.height * 0.2),
+                radius=[max(self.width, self.height)]
+            )
 
     def display_cell_value(self, value: int):
         self.canvas.before.clear()
