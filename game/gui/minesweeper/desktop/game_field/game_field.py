@@ -1,19 +1,12 @@
 from kivy.uix.gridlayout import GridLayout
-# from kivy.uix.recycleview import RecycleView
-# from kivy.uix.relativelayout import RelativeLayout
-from kivy.properties import ObjectProperty, NumericProperty
+from kivy.properties import ObjectProperty
 
-from game.core import Field, Cell
+from game.core import Field
 from gui.minesweeper.templates import FadingLayout, CellButton
-# from ..mine_field import MineField
 
 
 class GameField(FadingLayout):
-    # scroll_widget: RecycleView = ObjectProperty()
     mine_field: GridLayout = ObjectProperty()
-    # mine_field_container: RelativeLayout = ObjectProperty()
-    # mine_field_width = NumericProperty(0)
-    # mine_field_height = NumericProperty(0)
 
     field: Field
 
@@ -29,16 +22,6 @@ class GameField(FadingLayout):
         for row in self.field.field:
             for cell in row:
                 self.mine_field.add_widget(CellButton(self, cell))
-
-        # self.scroll_widget.data = [{'game_field': self, 'cell': cell} for row in self.field.field for cell in row]
-
-        # mine_field = MineField(
-        #     self, width, height, [{'game_field': self, 'cell': cell} for row in self.field.field for cell in row])
-        # mine_field.scroll_x = 0
-        # mine_field.scroll_y = 1  # TODO
-        # self.mine_field_width = mine_field.mine_field.width
-        # self.mine_field_height = mine_field.mine_field.height
-        # self.mine_field_container.add_widget(mine_field)
 
     def open_cells(self):
         if self.field.game_ended():
