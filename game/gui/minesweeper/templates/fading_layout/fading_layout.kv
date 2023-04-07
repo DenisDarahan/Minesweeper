@@ -1,0 +1,212 @@
+<FadingLayout>:
+    blur_color: [1, 1, 1]
+
+    left_blur: True
+    top_blur: True
+    right_blur: True
+    bottom_blur: True
+
+    canvas.after:
+        Color:
+            rgba: (*self.blur_color, 0.5 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height, self.x, self.y
+        Color:
+            rgba: (*self.blur_color, 0.45 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(1), self.y + self.height, self.x + dp(1), self.y
+        Color:
+            rgba: (*self.blur_color, 0.4 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(2), self.y + self.height, self.x + dp(2), self.y
+        Color:
+            rgba: (*self.blur_color, 0.35 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(3), self.y + self.height, self.x + dp(3), self.y
+        Color:
+            rgba: (*self.blur_color, 0.3 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(4), self.y + self.height, self.x + dp(4), self.y
+        Color:
+            rgba: (*self.blur_color, 0.25 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(5), self.y + self.height, self.x + dp(5), self.y
+        Color:
+            rgba: (*self.blur_color, 0.2 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(6), self.y + self.height, self.x + dp(6), self.y
+        Color:
+            rgba: (*self.blur_color, 0.15 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(7), self.y + self.height, self.x + dp(7), self.y
+        Color:
+            rgba: (*self.blur_color, 0.1 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(8), self.y + self.height, self.x + dp(8), self.y
+        Color:
+            rgba: (*self.blur_color, 0.05 * self.left_blur)
+        Line:
+            width: dp(1)
+            points: self.x + dp(9), self.y + self.height, self.x + dp(9), self.y
+
+        Color:
+            rgba: (*self.blur_color, 0.5 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height, self.x + self.width, self.y + self.height
+        Color:
+            rgba: (*self.blur_color, 0.45 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(1), self.x + self.width, self.y + self.height - dp(1)
+        Color:
+            rgba: (*self.blur_color, 0.4 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(2), self.x + self.width, self.y + self.height - dp(2)
+        Color:
+            rgba: (*self.blur_color, 0.35 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(3), self.x + self.width, self.y + self.height - dp(3)
+        Color:
+            rgba: (*self.blur_color, 0.3 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(4), self.x + self.width, self.y + self.height - dp(4)
+        Color:
+            rgba: (*self.blur_color, 0.25 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(5), self.x + self.width, self.y + self.height - dp(5)
+        Color:
+            rgba: (*self.blur_color, 0.2 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(6), self.x + self.width, self.y + self.height - dp(6)
+        Color:
+            rgba: (*self.blur_color, 0.15 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(7), self.x + self.width, self.y + self.height - dp(7)
+        Color:
+            rgba: (*self.blur_color, 0.1 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(8), self.x + self.width, self.y + self.height - dp(8)
+        Color:
+            rgba: (*self.blur_color, 0.05 * self.top_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + self.height - dp(9), self.x + self.width, self.y + self.height - dp(9)
+
+        Color:
+            rgba: (*self.blur_color, 0.05 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(9), self.y + self.height, self.x + self.width - dp(9), self.y
+        Color:
+            rgba: (*self.blur_color, 0.1 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(8), self.y + self.height, self.x + self.width - dp(8), self.y
+        Color:
+            rgba: (*self.blur_color, 0.15 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(7), self.y + self.height, self.x + self.width - dp(7), self.y
+        Color:
+            rgba: (*self.blur_color, 0.2 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(6), self.y + self.height, self.x + self.width - dp(6), self.y
+        Color:
+            rgba: (*self.blur_color, 0.25 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(5), self.y + self.height, self.x + self.width - dp(5), self.y
+        Color:
+            rgba: (*self.blur_color, 0.3 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(4), self.y + self.height, self.x + self.width - dp(4), self.y
+        Color:
+            rgba: (*self.blur_color, 0.35 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(3), self.y + self.height, self.x + self.width - dp(3), self.y
+        Color:
+            rgba: (*self.blur_color, 0.4 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(2), self.y + self.height, self.x + self.width - dp(2), self.y
+        Color:
+            rgba: (*self.blur_color, 0.45 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width - dp(1), self.y + self.height, self.x + self.width - dp(1), self.y
+        Color:
+            rgba: (*self.blur_color, 0.5 * self.right_blur)
+        Line:
+            width: dp(1)
+            points: self.x + self.width, self.y + self.height, self.x + self.width, self.y
+
+        Color:
+            rgba: (*self.blur_color, 0.05 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(9), self.x + self.width, self.y + dp(9)
+        Color:
+            rgba: (*self.blur_color, 0.1 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(8), self.x + self.width, self.y + dp(8)
+        Color:
+            rgba: (*self.blur_color, 0.15 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(7), self.x + self.width, self.y + dp(7)
+        Color:
+            rgba: (*self.blur_color, 0.2 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(6), self.x + self.width, self.y + dp(6)
+        Color:
+            rgba: (*self.blur_color, 0.25 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(5), self.x + self.width, self.y + dp(5)
+        Color:
+            rgba: (*self.blur_color, 0.3 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(4), self.x + self.width, self.y + dp(4)
+        Color:
+            rgba: (*self.blur_color, 0.35 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(3), self.x + self.width, self.y + dp(3)
+        Color:
+            rgba: (*self.blur_color, 0.4 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(2), self.x + self.width, self.y + dp(2)
+        Color:
+            rgba: (*self.blur_color, 0.45 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y + dp(1), self.x + self.width, self.y + dp(1)
+        Color:
+            rgba: (*self.blur_color, 0.5 * self.bottom_blur)
+        Line:
+            width: dp(1)
+            points: self.x, self.y, self.x + self.width, self.y

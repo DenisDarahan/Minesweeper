@@ -1,0 +1,10 @@
+.idea/
+.DB_Store/
+
+venv/
+__pycache__/
+
+*.pyd
+*.pyc
+*.pyo
+*.py#

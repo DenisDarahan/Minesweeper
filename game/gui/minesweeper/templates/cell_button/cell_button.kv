@@ -1,0 +1,54 @@
+<CellButton>:
+    flag: 0
+    opened: 0
+    is_mine: 0
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, self.flag
+        Line:
+            width: self.round_radius
+            points:
+                self.x + self.width / 2 + self.round_radius, self.y + self.height / 2 + self.radius_distance, \
+                self.x + self.width / 2 + self.round_radius, self.y + 0.2 * self.height + self.round_radius
+        Line:
+            cap: 'none'
+            width: self.round_radius
+            points:
+                self.x + 0.25 * self.width, self.y + 0.2 * self.height + self.round_radius, \
+                self.x + 0.75 * self.width, self.y + 0.2 * self.height + self.round_radius
+        Line:
+            cap: 'none'
+            width: self.round_radius
+            points:
+                self.x + 0.3 * self.width, self.y + 0.2 * self.height + 2 * self.round_radius, \
+                self.x + 0.7 * self.width, self.y + 0.2 * self.height + 2 * self.round_radius
+        Color:
+            rgba: 1, 0, 0, self.flag
+        Triangle:
+            points:
+                self.x + self.width / 2 + 2 * self.round_radius, self.y + self.height / 2, \
+                self.x + self.width / 2 + 2 * self.round_radius, self.y + 0.8 * self.height, \
+                self.x + 0.2 * self.width, self.y + 0.65 * self.height
+
+    #canvas.after:
+    #    Color:
+    #        rgba: 1, 0, 0, self.opened * self.is_mine
+    #    Rectangle:
+    #        size: self.size
+    #        pos: self.pos
+    #    Color:
+    #        rgba: 1, 1, 1, self.opened * 0 ** self.is_mine
+    #    Rectangle:
+    #        size: self.size
+    #        pos: self.pos
+
+    size: '25dp', '25dp'
+
+    #on_press: print(f'pressed {self} -> {self.index}')
+    on_touch_down: self.on_right_click(*args)
+    on_long_press: self.change_flag_long_press()
+    on_release: self.open()
+
+    color: 1, 0, 0, 1
+    text: ''

@@ -1,0 +1,26 @@
+<RootWindow>:
+    game_field: game_field
+
+    orientation: 'vertical'
+
+    BoxLayout:
+        size_hint_y: None
+        height: '150dp'
+        canvas.before:
+            Color:
+                rgba: 1, 0, 0, 0.7
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        RelativeLayout:
+            DefaultButton:
+                size_hint: None, None
+                size: '50dp', '50dp'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    BoxLayout:
+        padding: '20dp'
+
+        GameField:
+            id: game_field

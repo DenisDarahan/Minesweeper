@@ -1,0 +1,30 @@
+<GameField>:
+#    mine_field_container: mine_field_container
+#    mine_field_width: 0
+#    mine_field_height: 0
+    #scroll_widget: scroll_widget
+    mine_field: mine_field
+
+    # TODO
+    left_blur: self.width < mine_field.width and scroll_widget.scroll_x > 0
+    top_blur: self.height < mine_field.height and scroll_widget.scroll_y < 1
+    right_blur: self.width < mine_field.width and scroll_widget.scroll_x < 1
+    bottom_blur: self.height < mine_field.height and scroll_widget.scroll_y > 0
+
+    RelativeLayout:
+#        id: mine_field_container
+
+        ScrollView:
+            id: scroll_widget
+            effect_cls: ScrollEffect
+            size_hint: None, None
+            size: min(mine_field.width, self.parent.width), min(mine_field.height, self.parent.height)
+            do_scroll: (mine_field.width > self.parent.width), (mine_field.height > self.parent.height)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            GridLayout:
+                id: mine_field
+                size_hint: None, None
+                size:
+                    (self.cols or 0) * (self.children[0].width if self.children else dp(0)), \
+                    (self.rows or 0) * (self.children[0].height if self.children else dp(0))
