@@ -39,10 +39,10 @@ class Cell:
 
         return opened_cells
 
-    def open_neighbours(self) -> typing.Generator:
-        # for neighbour in self.neighbours:
-        #     neighbour.open()
-        return (neighbour.open() for neighbour in self.neighbours)
+    # def open_neighbours(self) -> typing.Generator:
+    #     # for neighbour in self.neighbours:
+    #     #     neighbour.open()
+    #     return (neighbour.open() for neighbour in self.neighbours)
 
     def __format__(self, format_spec: str) -> str:
         return format(self.value, format_spec)

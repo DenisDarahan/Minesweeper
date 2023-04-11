@@ -25,15 +25,23 @@ class GameField(FadingLayout):
 
     def open_cells(self):
         if self.field.game_ended():
-            self.end_game()
+            self.success()
             return
 
         for cell_button in self.mine_field.children:
-            if cell_button.cell.opened and not cell_button.opened:
+            if cell_button.cell.opened:
                 if cell_button.cell.is_mine():
                     cell_button.display_mine()
                 else:
                     cell_button.display_cell_value(cell_button.cell.value)
+
+    def success(self):
+        pass
+
+    def fail(self):
+        for cell_button in self.mine_field.children:
+            if cell_button.cell.is_mine and not cell_button.cell.opened:
+                cell_button.display_mine()
 
     def end_game(self):
         # self.build_game()

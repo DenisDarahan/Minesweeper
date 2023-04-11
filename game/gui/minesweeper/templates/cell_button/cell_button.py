@@ -13,8 +13,6 @@ from ..long_press_button import LongPressButton
 
 class CellButton(DefaultButton, LongPressButton):
     flag = NumericProperty(0)
-    opened = NumericProperty(0)
-    is_mine = NumericProperty(0)
 
     game_field: BoxLayout
     cell: Cell
@@ -25,18 +23,14 @@ class CellButton(DefaultButton, LongPressButton):
 
         self.game_field = game_field
         self.cell = cell
-        self.is_mine = int(self.cell.is_mine())
 
-    def create_widgets(self):
-        pass
-
-    def display_mine(self):
+    def display_mine(self, user_pressed: bool = False):
         self.canvas.before.clear()
 
         with self.canvas.before:
             Color(rgba=(0.52, 0.52, 0.52, 1))
             Line(width=dp(1), rectangle=(self.x, self.y, self.width, self.height))
-            Color(rgba=(1, 0, 0, 1))
+            Color(rgba=(1, 0, 0, int(user_pressed)))
             Rectangle(size=(self.width + dp(2), self.height), pos=(self.x + dp(1), self.y - dp(1)))
             Color(rgba=(0, 0, 0, 1))
             Line(
@@ -79,13 +73,14 @@ class CellButton(DefaultButton, LongPressButton):
 
     def display_cell_value(self, value: int):
         self.canvas.before.clear()
+
         with self.canvas.before:
             Color(rgba=(0.75, 0.75, 0.75, 1))
             Rectangle(size=self.size, pos=self.pos)
             Color(rgba=(0.52, 0.52, 0.52, 1))
             Line(width=dp(1), rectangle=(self.x, self.y, self.width, self.height))
 
-        self.text = str(value or ' ')
+        self.text = str(value)
 
     def on_flag(self, _instance, value: int):
         self.cell.flag = bool(value)
@@ -115,12 +110,12 @@ class CellButton(DefaultButton, LongPressButton):
             self.change_flag()
             return
 
-        opened_cells = self.cell.open()
+        _opened_cells = self.cell.open()
 
-        if opened_cells[0].is_mine():
-            self.display_mine()
-            self.game_field.end_game()
+        if self.cell.is_mine():
+            self.display_mine(True)
+            self.game_field.fail()
             return
 
-        self.display_cell_value(opened_cells[0].value)
+        self.display_cell_value(self.cell.value)
         self.game_field.open_cells()
