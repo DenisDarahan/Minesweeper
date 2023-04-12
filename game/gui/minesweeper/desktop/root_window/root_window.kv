@@ -1,4 +1,5 @@
 <RootWindow>:
+    status: status
     game_field: game_field
 
     orientation: 'vertical'
@@ -15,9 +16,41 @@
 
         RelativeLayout:
             DefaultButton:
+                id: status
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 0.34, 1
+                    RoundedRectangle:
+                        size: 0.6 * self.width, 0.6 * self.height
+                        pos: self.x + 0.2 * self.width, self.y + 0.2 * self.height
+                        radius: [max(self.size) * 0.3]
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Line:
+                        width: dp(1)
+                        ellipse:
+                            self.x + 0.2 * self.width, self.y + 0.2 * self.height, \
+                            0.6 * self.width, 0.6 * self.height
+                    Line:
+                        group: 'mouth'
+                        width: dp(1)
+                        ellipse:
+                            self.x + 0.25 * self.width, self.y + 0.35 * self.height, \
+                            0.5 * self.width, 0.6 * self.height, 135, 225
+                    Line:
+                        group: 'left_eye'
+                        width: dp(1)
+                        ellipse: self.x + 0.4 * self.width, self.y + 0.55 * self.height, dp(2), dp(2)
+                    Line:
+                        group: 'right_eye'
+                        width: dp(1)
+                        ellipse: self.x + 0.55 * self.width, self.y + 0.55 * self.height, dp(2), dp(2)
+
                 size_hint: None, None
                 size: '50dp', '50dp'
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_release: root.restart()
 
     BoxLayout:
         padding: '20dp'

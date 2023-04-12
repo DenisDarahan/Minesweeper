@@ -11,7 +11,7 @@ class GameField(FadingLayout):
     field: Field
 
     def on_kv_post(self, base_widget):
-        self.build_game(20, 20, 30)
+        self.build_game()
 
     def build_game(self, width: int = 10, height: int = 10, mines_amount: int = 10):
         self.field = Field(width, height, mines_amount)
