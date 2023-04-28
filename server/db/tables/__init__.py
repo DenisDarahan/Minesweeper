@@ -1,2 +1,2 @@
-from .gamer import Gamer
+from .user import User
 from .rate import Rate

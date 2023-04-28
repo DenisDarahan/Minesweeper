@@ -9,10 +9,9 @@ class _BaseTable:
 
     def __init__(self, connector: Connector):
         self.connector = connector
+        self._init_table()
 
     def _init_table(self):
-        con, cur = self.connector.create_sync()
-        cur.execute(self.INIT_TABLE)
-        con.commit()
-        cur.close()
-        con.close()
+        with self.connector.sync() as (con, cur):
+            cur.execute(self.INIT_TABLE)
+            con.commit()

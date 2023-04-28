@@ -1,14 +1,12 @@
-from fastapi import FastAPI
+import uvicorn
+
+from server.settings import settings
 
 
-app = FastAPI()
-
-
-@app.get('/index/')
-async def root():
-    return {"message": "Hello Index"}
-
-
-# @app.post('/create-user/')
-# async def create_user():
-#     pass
+if __name__ == '__main__':
+    uvicorn.run(
+        'app:app',
+        host=settings.host,
+        port=settings.port,
+        reload=True
+    )
