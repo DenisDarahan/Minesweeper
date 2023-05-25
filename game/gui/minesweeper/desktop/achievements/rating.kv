@@ -1,0 +1,134 @@
+#:import ScrollEffect kivy.effects.scroll.ScrollEffect
+
+
+<LoadingImage>:
+    source: 'resources/image-loading.gif'
+    anim_delay: 0.1
+
+
+<RatingRow>:
+    line_number: line_number
+    username: username
+    score: score
+
+    size_hint_y: None
+    height: '20dp'
+
+    BoxLayout:
+        size_hint_x: 0.2
+
+        RelativeLayout:
+            Label:
+                id: line_number
+                size_hint_x: None
+                width: self.texture_size[0]
+                pos_hint: {'right': 0.9}
+                color: 0, 0, 0, 1
+                font_size: '15sp'
+
+    BoxLayout:
+        RelativeLayout:
+            Label:
+                id: username
+                size_hint_x: None
+                width: self.texture_size[0]
+                pos_hint: {'x': 0.1}
+                color: 0, 0, 0, 1
+                font_size: '15sp'
+
+    BoxLayout:
+        size_hint_x: 0.3
+
+        RelativeLayout:
+            Label:
+                id: score
+                size_hint_x: None
+                width: self.texture_size[0]
+                pos_hint: {'center_x': 0.5}
+                color: 0, 0, 0, 1
+                font_size: '15sp'
+
+
+<ListButton>:
+    button_color: DARK_GRAY
+
+    background_color: 0, 0, 0, 0
+    background_normal: ''
+    background_disabled_normal: ''
+    background_down: ''
+    on_disabled: self.button_color = ((0, 0, 0, 0) if self.disabled else DARK_GRAY)
+    on_press: self.button_color = DOWN_DARK_GRAY
+    on_release: self.button_color = DARK_GRAY
+
+
+<RatingTable>:
+    table_header: table_header
+    table_content: table_content
+    list_up: list_up
+    list_down: list_down
+
+    BoxLayout:
+        spacing: '1dp'
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: '1dp'
+
+            RatingRow:
+                id: table_header
+
+            BoxLayout:
+                RelativeLayout:
+                    BoxLayout:
+                        id: table_content
+                        orientation: 'vertical'
+                        spacing: '1dp'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        pos_hint: {'center_x': 0.5, 'top': 1}
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: None
+            width: '20dp'
+
+            Widget:
+                size_hint_y: None
+                height: table_header.height
+
+            BoxLayout:
+                ListButton:
+                    id: list_up
+                    canvas.before:
+                        Color:
+                            rgba: self.button_color
+                        Triangle:
+                            points:
+                                self.x, self.y + self.height / 2, self.x + self.width / 2, self.y + self.height, \
+                                self.x + self.width, self.y + self.height / 2
+                    size_hint_y: None
+                    height: '20dp'
+                    pos_hint: {'center_x': 0.5, 'top': 0.9}
+                    on_release: root.up_list()
+
+            BoxLayout:
+                ListButton:
+                    id: list_down
+                    canvas.before:
+                        Color:
+                            rgba: self.button_color
+                        Triangle:
+                            points:
+                                self.x, self.y + self.height / 2, self.x + self.width / 2, self.y, \
+                                self.x + self.width, self.y + self.height / 2
+                    size_hint_y: None
+                    height: '20dp'
+                    pos_hint: {'center_x': 0.5, 'y': 0.1}
+                    on_release: root.down_list()
+
+
+<RatingContainer>:
+    container: container
+
+    RelativeLayout:
+        id: container

@@ -1,59 +1,197 @@
+#:import Window kivy.core.window.Window
+#:import Metrics kivy.metrics.Metrics
+
+#:include game/gui/minesweeper/desktop/root_window/menu_bar_button.kv
+
+
 <RootWindow>:
-    status: status
+    mines_counter: mines_counter
+    status_button: status_button
+    time_counter: time_counter
     game_field: game_field
 
+    canvas.before:
+        Color:
+            rgba: NORMAL_GRAY
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
     orientation: 'vertical'
+    size_hint: None, None
+    size: game.width, game.height + menu_bar.height
 
     BoxLayout:
+        id: menu_bar
         size_hint_y: None
-        height: '150dp'
+        height: '25dp'
+
+        MenuBarButton:
+            id: configs
+            text: 'Configs'
+            menu_list: [{'text': 'Field', 'on_release': root.config_field}]
+
+        MenuBarButton:
+            id: stats
+            text: 'Stats'
+            menu_list:
+                [{'text': 'Statistics', 'on_release': root.statistics}, \
+                {'text': 'Achievements', 'on_release': root.achievements}]
+
+    BoxLayout:
+        id: game
+
         canvas.before:
             Color:
-                rgba: 1, 0, 0, 0.7
-            Rectangle:
-                size: self.size
-                pos: self.pos
+                rgba: DARK_GRAY
+            Triangle:
+                points:
+                    self.x, self.y, self.x + dp(5), self.y + dp(5), self.x + dp(5), self.y
+            Triangle:
+                points:
+                    self.x + self.width - dp(5), self.y + self.height - dp(5), \
+                    self.x + self.width, self.y + self.height, \
+                    self.x + self.width, self.y + self.height - dp(5)
+            Line:
+                cap: 'none'
+                joint: 'miter'
+                width: dp(2.5)
+                points:
+                    self.x + dp(5), self.y + dp(2.5), self.x + self.width - dp(2.5), self.y + dp(2.5), \
+                    self.x + self.width - dp(2.5), self.y + self.height - dp(5)
+            Triangle:
+                points:
+                    self.x + dp(15), self.y + dp(15), self.x + dp(20), self.y + dp(20), self.x + dp(15), self.y + dp(20)
+            Triangle:
+                points:
+                    self.x + self.width - dp(20), self.y + self.height - dp(140), \
+                    self.x + self.width - dp(15), self.y + self.height - dp(135), \
+                    self.x + self.width - dp(20), self.y + self.height - dp(135)
+            Line:
+                cap: 'none'
+                joint: 'miter'
+                width: dp(2.5)
+                points:
+                    self.x + dp(17.5), self.y + dp(17.5), self.x + dp(17.5), self.y + self.height - dp(137.5), \
+                    self.x + self.width - dp(17.5), self.y + self.height - dp(137.5)
+            Triangle:
+                points:
+                    self.x + dp(15), self.y + self.height - dp(125), self.x + dp(20), self.y + self.height - dp(120), \
+                    self.x + dp(15), self.y + self.height - dp(120)
+            Triangle:
+                points:
+                    self.x + self.width - dp(20), self.y + self.height - dp(20), \
+                    self.x + self.width - dp(15), self.y + self.height - dp(15), \
+                    self.x + self.width - dp(20), self.y + self.height - dp(15)
+            Line:
+                cap: 'none'
+                joint: 'miter'
+                width: dp(2.5)
+                points:
+                    self.x + dp(17.5), self.y + self.height - dp(120), \
+                    self.x + dp(17.5), self.y + self.height - dp(17.5), \
+                    self.x + self.width - dp(20), self.y + self.height - dp(17.5)
+            Color:
+                rgba: LIGHT_GRAY
+            Triangle:
+                points:
+                    self.x, self.y, self.x + dp(5), self.y + dp(5), self.x, self.y + dp(5)
+            Triangle:
+                points:
+                    self.x + self.width - dp(5), self.y + self.height - dp(5), \
+                    self.x + self.width, self.y + self.height, \
+                    self.x + self.width - dp(5), self.y + self.height
+            Line:
+                cap: 'none'
+                joint: 'miter'
+                width: dp(2.5)
+                points:
+                    self.x + dp(2.5), self.y + dp(5), self.x + dp(2.5), self.y + self.height - dp(2.5), \
+                    self.x + self.width - dp(5), self.y + self.height - dp(2.5)
+            Triangle:
+                points:
+                    self.x + dp(15), self.y + dp(15), self.x + dp(20), self.y + dp(20), self.x + dp(20), self.y + dp(15)
+            Triangle:
+                points:
+                    self.x + self.width - dp(20), self.y + self.height - dp(140), \
+                    self.x + self.width - dp(15), self.y + self.height - dp(135), \
+                    self.x + self.width - dp(15), self.y + self.height - dp(140)
+            Line:
+                cap: 'none'
+                joint: 'miter'
+                width: dp(2.5)
+                points:
+                    self.x + dp(20), self.y + dp(17.5), self.x + self.width - dp(17.5), self.y + dp(17.5), \
+                    self.x + self.width - dp(17.5), self.y + self.height - dp(140)
+            Triangle:
+                points:
+                    self.x + dp(15), self.y + self.height - dp(125), self.x + dp(20), self.y + self.height - dp(120), \
+                    self.x + dp(20), self.y + self.height - dp(125)
+            Triangle:
+                points:
+                    self.x + self.width - dp(20), self.y + self.height - dp(20), \
+                    self.x + self.width - dp(15), self.y + self.height - dp(15), \
+                    self.x + self.width - dp(15), self.y + self.height - dp(20)
+            Line:
+                cap: 'none'
+                joint: 'miter'
+                width: dp(2.5)
+                points:
+                    self.x + dp(20), self.y + self.height - dp(122.5), \
+                    self.x + self.width - dp(17.5), self.y + self.height - dp(122.5), \
+                    self.x + self.width - dp(17.5), self.y + self.height - dp(20)
+            Color:
+                rgba: NORMAL_GRAY
+            Line:
+                joint: 'miter'
+                width: dp(5)
+                rectangle: self.x + dp(10), self.y + dp(10), self.width - dp(20), self.height - dp(20)
+            Line:
+                width: dp(5)
+                points:
+                    self.x + dp(10), self.y + self.height - dp(130), \
+                    self.x + self.width - dp(10), self.y + self.height - dp(130)
 
-        RelativeLayout:
-            DefaultButton:
-                id: status
-
-                canvas.before:
-                    Color:
-                        rgba: 1, 1, 0.34, 1
-                    RoundedRectangle:
-                        size: 0.6 * self.width, 0.6 * self.height
-                        pos: self.x + 0.2 * self.width, self.y + 0.2 * self.height
-                        radius: [max(self.size) * 0.3]
-                    Color:
-                        rgba: 0, 0, 0, 1
-                    Line:
-                        width: dp(1)
-                        ellipse:
-                            self.x + 0.2 * self.width, self.y + 0.2 * self.height, \
-                            0.6 * self.width, 0.6 * self.height
-                    Line:
-                        group: 'mouth'
-                        width: dp(1)
-                        ellipse:
-                            self.x + 0.25 * self.width, self.y + 0.35 * self.height, \
-                            0.5 * self.width, 0.6 * self.height, 135, 225
-                    Line:
-                        group: 'left_eye'
-                        width: dp(1)
-                        ellipse: self.x + 0.4 * self.width, self.y + 0.55 * self.height, dp(2), dp(2)
-                    Line:
-                        group: 'right_eye'
-                        width: dp(1)
-                        ellipse: self.x + 0.55 * self.width, self.y + 0.55 * self.height, dp(2), dp(2)
-
-                size_hint: None, None
-                size: '50dp', '50dp'
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                on_release: root.restart()
-
-    BoxLayout:
+        orientation: 'vertical'
         padding: '20dp'
+        spacing: '20dp'
+        size_hint: None, None
+        size:
+            self.padding[0] + game_field.width + self.padding[2], \
+            self.padding[1] + game_info.height + self.spacing + game_field.height + self.padding[3]
+
+        BoxLayout:
+            id: game_info
+            padding: '5dp', '0dp'
+            size_hint_y: None
+            height: '100dp'
+
+            BoxLayout:
+                RelativeLayout:
+                    Counter:
+                        id: mines_counter
+                        pos_hint: {'x': 0, 'center_y': 0.5}
+
+            BoxLayout:
+                size_hint_x: None
+                width: status_button.width
+
+                RelativeLayout:
+                    StatusButton:
+                        id: status_button
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        on_release: root.restart()
+
+            BoxLayout:
+                RelativeLayout:
+                    Counter:
+                        id: time_counter
+                        pos_hint: {'right': 1, 'center_y': 0.5}
 
         GameField:
             id: game_field
+            root_window: root
+            size_hint: None, None
+            size: self.mine_field.size
+            _density: Metrics.get_density()
+            on_size: Window.size = (game.width / self._density, (game.height + menu_bar.height) / self._density)

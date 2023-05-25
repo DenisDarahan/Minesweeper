@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Path, HTTPException, Depends, status
+from fastapi.responses import JSONResponse
 
 from server.db import db
 from server.utils import get_current_user
@@ -17,6 +18,12 @@ async def get_user(user_id: Annotated[int, Path()]) -> UserInfo:
     if not user_info:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User with such ID not exists')
     return user_info
+
+
+@router.get('/login-exists/{login}', status_code=status.HTTP_200_OK, response_model=None)
+async def login_exists(login: Annotated[str, Path()]) -> JSONResponse:
+    user = await db.user.get_by_username(login)
+    return JSONResponse({'exists': bool(user)})
 
 
 @router.get('/me', status_code=status.HTTP_200_OK, response_model=UserInfo)

@@ -1,0 +1,34 @@
+#:include game/gui/minesweeper/desktop/achievements/rating.kv
+
+
+<Achievements>:
+    rating_container: rating_container
+
+    size_hint: None, None
+    size: '275dp', '330dp'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '10dp'
+
+        Label:
+            size_hint_y: None
+            height: '25dp'
+            font_size: '20sp'
+            color: 0, 0, 0, 1
+            text: 'Rating'
+
+        RatingContainer:
+            id: rating_container
+            parent_popup: root
+
+        BoxLayout:
+            size_hint_y: None
+            height: '27dp'
+            RelativeLayout:
+                NormalButton:
+                    size_hint_x: 0.5
+                    pos_hint: {'center_x': 0.5}
+                    font_size: '17sp'
+                    text: 'OK'
+                    on_release: root.dismiss()

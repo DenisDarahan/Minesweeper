@@ -1,0 +1,160 @@
+#:import Factory kivy.factory.Factory
+
+#:include game/gui/minesweeper/desktop/field_config/field_config_input.kv
+
+
+<NormalSpinner@Spinner>:
+    canvas.before:
+        Color:
+            rgba: DARK_GRAY
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(1)]
+
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+
+
+<NormalOption@SpinnerOption>:
+    canvas.before:
+        Color:
+            rgba: DARK_GRAY
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(1)]
+
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+
+
+<FieldConfig>:
+    title: title
+    fast_config_label: fast_config_label
+    fast_config: fast_config
+    width_config_label: width_config_label
+    width_config: width_config
+    height_config_label: height_config_label
+    height_config: height_config
+    mines_config_label: mines_config_label
+    mines_config: mines_config
+    accept: accept
+
+    size_hint: None, None
+    size: '275dp', '240dp'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: '10dp'
+
+        Label:
+            id: title
+            size_hint_y: None
+            height: '25dp'
+            font_size: '20sp'
+            color: (0, 0, 0, 1)
+            text: 'Field'
+
+        GridLayout:
+            spacing: '5dp'
+            rows: 4
+            cols: 2
+
+            BoxLayout:
+                RelativeLayout:
+                    Label:
+                        id: fast_config_label
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        pos_hint: {'right': 0.9}
+                        font_size: '17sp'
+                        color: (0, 0, 0, 1)
+                        text: 'Level:'
+
+            BoxLayout:
+                RelativeLayout:
+                    NormalSpinner:
+                        id: fast_config
+                        option_cls: Factory.get('NormalOption')
+                        size_hint: 0.8, 0.9
+                        pos_hint: {'x': 0, 'center_y': 0.5}
+                        sync_height: True
+                        values: root.FAST_CONFIG.keys()
+                        on_text: root.update_config()
+
+            BoxLayout:
+                RelativeLayout:
+                    Label:
+                        id: width_config_label
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        pos_hint: {'right': 0.9}
+                        font_size: '17sp'
+                        color: (0, 0, 0, 1)
+                        text: 'Width:'
+
+            BoxLayout:
+                RelativeLayout:
+                    FieldConfigInput:
+                        id: width_config
+                        min_value: root.MIN_WIDTH
+                        max_value: root.MAX_WIDTH
+                        size_hint_x: 0.6
+                        pos_hint: {'x': 0, 'center_y': 0.5}
+
+            BoxLayout:
+                RelativeLayout:
+                    Label:
+                        id: height_config_label
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        pos_hint: {'right': 0.9}
+                        font_size: '17sp'
+                        color: (0, 0, 0, 1)
+                        text: 'Height:'
+
+            BoxLayout:
+                RelativeLayout:
+                    FieldConfigInput:
+                        id: height_config
+                        min_value: root.MIN_HEIGHT
+                        max_value: root.MAX_HEIGHT
+                        size_hint_x: 0.6
+                        pos_hint: {'x': 0, 'center_y': 0.5}
+
+            BoxLayout:
+                RelativeLayout:
+                    Label:
+                        id: mines_config_label
+                        size_hint_x: None
+                        width: self.texture_size[0]
+                        pos_hint: {'right': 0.9}
+                        font_size: '17sp'
+                        color: (0, 0, 0, 1)
+                        text: 'Mines:'
+
+            BoxLayout:
+                RelativeLayout:
+                    FieldConfigInput:
+                        id: mines_config
+                        min_value: root.MIN_MINES_AMOUNT
+                        max_value: root.MAX_MINES_AMOUNT
+                        size_hint_x: 0.6
+                        pos_hint: {'x': 0, 'center_y': 0.5}
+
+        BoxLayout:
+            size_hint_y: None
+            height: '27dp'
+            RelativeLayout:
+                NormalButton:
+                    id: accept
+                    size_hint_x: 0.5
+                    pos_hint: {'center_x': 0.5}
+                    font_size: '17sp'
+                    text: 'Accept'
+                    on_release: root.accept_config()

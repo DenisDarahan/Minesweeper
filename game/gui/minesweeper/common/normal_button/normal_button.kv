@@ -1,0 +1,18 @@
+<NormalButton>:
+    button_background_color: DARK_GRAY
+
+    canvas.before:
+        Color:
+            rgba: self.button_background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(1)]
+
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+
+    on_press: self.button_background_color = DOWN_DARK_GRAY
+    on_release: self.button_background_color = DARK_GRAY

@@ -17,7 +17,7 @@ class GameField:
     def open(self, x: int, y: int) -> 'tuple[bool, bool]':
         opened_cells = self.field.field[y][x].open()
 
-        if opened_cells[0].is_mine():
+        if opened_cells[0].is_mine:
             return True, False
         return self.field.game_ended(), True
 
@@ -29,7 +29,7 @@ class GameField:
         cell = self.field.field[row][column]
 
         if cell.opened:
-            symbol = self._MINE if cell.is_mine() else cell.value
+            symbol = self._MINE if cell.is_mine else cell.value
         else:
             symbol = self._FLAG if cell.flag else ' '
 

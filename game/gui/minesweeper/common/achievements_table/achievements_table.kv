@@ -1,0 +1,23 @@
+<AchievementsLabel>:
+    text_size: self.size
+    valign: 'middle'
+    font_size: '17sp'
+    color: 0, 0, 0, 1
+
+
+<AchievementsTable>:
+    names: names
+    values: values
+
+    spacing: '10dp'
+
+    BoxLayout:
+        id: names
+        orientation: 'vertical'
+        size_hint_x: 0.5
+        spacing: '3dp'
+
+    BoxLayout:
+        id: values
+        orientation: 'vertical'
+        spacing: '3dp'

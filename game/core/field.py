@@ -12,7 +12,8 @@ class Field:
 
     width: int
     height: int
-    field: 'list[list[Cell]]'
+    mines_amount: int
+    field: list[list[Cell]]
 
     def __init__(self, width: int, height: int, mines_amount: int = None):
         if width < self._MIN_WIDTH or height < self._MIN_HEIGHT:
@@ -24,18 +25,20 @@ class Field:
 
         self.height = height
         self.width = width
-        self.field = self.generate(mines_amount or int(math.sqrt(self.height * self.width)))
+        self.mines_amount = mines_amount or int(math.sqrt(self.height * self.width))
 
-    def generate(self, mines_amount: int) -> list[list]:
+        self.field = self.generate()
+
+    def generate(self) -> list[list]:
         field = [[Cell() for _x in range(self.width)] for _y in range(self.height)]
 
         self._set_neighbours(field)
-        self._set_mines(field, mines_amount)
+        self._set_mines(field, self.mines_amount)
         self._set_values(field)
 
         return field
 
-    def _set_neighbours(self, field: 'list[list]'):
+    def _set_neighbours(self, field: list[list]):
         field[0][0].set_neighbours(None, None, field[0][1], field[1][1], field[1][0], None, None, None)
         field[0][-1].set_neighbours(None, None, None, None, field[1][-1], field[1][-2], field[0][-2], None)
         field[-1][0].set_neighbours(field[-2][0], field[-2][1], field[-1][1], None, None, None, None, None)
@@ -44,14 +47,12 @@ class Field:
         for column in range(1, self.width - 1):
             field[0][column].set_neighbours(None, None, field[0][column + 1], field[1][column + 1],
                                             field[1][column], field[1][column - 1], field[0][column - 1], None)
-        for column in range(1, self.width - 1):
             field[-1][column].set_neighbours(field[-2][column], field[-2][column + 1], field[-1][column + 1], None,
                                              None, None, field[-1][column - 1], field[-2][column - 1])
 
         for row in range(1, self.height - 1):
             field[row][0].set_neighbours(field[row - 1][0], field[row - 1][1], field[row][1], field[row + 1][1],
                                          field[row + 1][0], None, None, None)
-        for row in range(1, self.height - 1):
             field[row][-1].set_neighbours(field[row - 1][-1], None, None, None,
                                           field[row + 1][-1], field[row + 1][-2], field[row][-2], field[row - 1][-2])
 
@@ -64,22 +65,23 @@ class Field:
                 field[y][x].set_neighbours(field[north][x], field[north][east], field[y][east], field[south][east],
                                            field[south][x], field[south][west], field[y][west], field[north][west])
 
-    def _set_mines(self, field: 'list[list]', mines_amount: int):
+    def _set_mines(self, field: list[list], mines_amount: int):
         for mine in range(mines_amount):
             while True:
                 x, y = random.randint(0, self.width - 1), random.randint(0, self.height - 1)
-                if field[x][y].value:
+                if field[y][x].value:
                     continue
-                field[x][y].set_mine()
+                field[y][x].set_mine()
                 break
 
-    def _set_values(self, field: 'list[list[Cell]]'):  # noqa
+    @classmethod
+    def _set_values(cls, field: list[list[Cell]]):
         for row in field:
             for cell in row:
                 cell.set_value()
 
     def game_ended(self) -> bool:
-        return all([cell.opened or cell.is_mine() for row in self.field for cell in row])
+        return all([cell.opened or cell.is_mine for row in self.field for cell in row])
 
     def display(self):
         print(self)

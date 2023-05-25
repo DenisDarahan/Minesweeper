@@ -1,0 +1,115 @@
+<Number>:
+    dash_passive: (1, 0, 0, 0.25)
+    dash_active: (1, 0, 0, 0.9)
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+        Color:
+            group: 'bottom'
+            rgba: self.dash_passive
+        Triangle:
+            points: self.x + dp(1), self.y, self.x + dp(6), self.y, self.x + dp(6), self.y + dp(5)
+        Triangle:
+            points:
+                self.x + self.width - dp(1), self.y, self.x + self.width - dp(6), self.y, \
+                self.x + self.width - dp(6), self.y + dp(5)
+        Rectangle:
+            size: self.width - dp(12), dp(5)
+            pos: self.x + dp(6), self.y
+
+        Color:
+            group: 'bottom_left'
+            rgba: self.dash_passive
+        Triangle:
+            points: self.x, self.y + dp(1), self.x, self.y + dp(6), self.x + dp(5), self.y + dp(6)
+        Triangle:
+            points:
+                self.x, self.y + self.height / 2 - dp(1), self.x, self.y + self.height / 2 - dp(6), \
+                self.x + dp(5), self.y + self.height / 2 - dp(6)
+        Rectangle:
+            size: dp(5), self.height / 2 - dp(12)
+            pos: self.x, self.y + dp(6)
+
+        Color:
+            group: 'bottom_right'
+            rgba: self.dash_passive
+        Triangle:
+            points:
+                self.x + self.width, self.y + dp(1), self.x + self.width, self.y + dp(6), \
+                self.x + self.width - dp(5), self.y + dp(6)
+        Triangle:
+            points:
+                self.x + self.width, self.y + self.height / 2 - dp(1), \
+                self.x + self.width, self.y + self.height / 2 - dp(6), \
+                self.x + self.width - dp(5), self.y + self.height / 2 - dp(6)
+        Rectangle:
+            size: dp(5), self.height / 2 - dp(12)
+            pos: self.x + self.width - dp(5), self.y + dp(6)
+
+        Color:
+            group: 'middle'
+            rgba: self.dash_passive
+        Triangle:
+            points:
+                self.x + dp(1), self.y + self.height / 2, self.x + dp(6), self.y + self.height / 2 + dp(2.5), \
+                self.x + dp(6), self.y + self.height / 2 - dp(2.5)
+        Triangle:
+            points:
+                self.x + self.width - dp(1), self.y + self.height / 2, \
+                self.x + self.width - dp(6), self.y + self.height / 2 + dp(2.5), \
+                self.x + self.width - dp(6), self.y + self.height / 2 - dp(2.5)
+        Rectangle:
+            size: self.width - dp(12), dp(5)
+            pos: self.x + dp(6), self.y + self.height / 2 - dp(2.5)
+
+        Color:
+            group: 'top_left'
+            rgba: self.dash_passive
+        Triangle:
+            points:
+                self.x, self.y + self.height / 2 + dp(1), self.x, self.y + self.height / 2 + dp(6), \
+                self.x + dp(5), self.y + self.height / 2 + dp(6)
+        Triangle:
+            points:
+                self.x, self.y + self.height - dp(1), self.x, self.y + self.height - dp(6), \
+                self.x + dp(5), self.y + self.height - dp(6)
+        Rectangle:
+            size: dp(5), self.height / 2 - dp(12)
+            pos: self.x, self.y + self.height / 2 + dp(6)
+
+        Color:
+            group: 'top_right'
+            rgba: self.dash_passive
+        Triangle:
+            points:
+                self.x + self.width, self.y + self.height / 2 + dp(1), \
+                self.x + self.width, self.y + self.height / 2 + dp(6), \
+                self.x + self.width - dp(5), self.y + self.height / 2 + dp(6)
+        Triangle:
+            points:
+                self.x + self.width, self.y + self.height - dp(1), \
+                self.x + self.width, self.y + self.height - dp(6), \
+                self.x + self.width - dp(5), self.y + self.height - dp(6)
+        Rectangle:
+            size: dp(5), self.height / 2 - dp(12)
+            pos: self.x + self.width - dp(5), self.y + self.height / 2 + dp(6)
+
+        Color:
+            group: 'top'
+            rgba: self.dash_passive
+        Triangle:
+            points:
+                self.x + dp(1), self.y + self.height, self.x + dp(6), self.y + self.height, \
+                self.x + dp(6), self.y + self.height - dp(5)
+        Triangle:
+            points:
+                self.x + self.width - dp(1), self.y + self.height, self.x + self.width - dp(6), self.y + self.height, \
+                self.x + self.width - dp(6), self.y + self.height - dp(5)
+        Rectangle:
+            size: self.width - dp(12), dp(5)
+            pos: self.x + dp(6), self.y + self.height - dp(5)

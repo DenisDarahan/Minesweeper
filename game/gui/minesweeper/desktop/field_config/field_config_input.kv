@@ -1,0 +1,10 @@
+<FieldConfigInput>:
+    size_hint_y: None
+    height: '27dp'
+    font_size: '17sp'
+    multiline: False
+    input_filter: 'int'
+    on_focus: self.text = self.text or str(self.min_value)
+    on_text:
+        self.foreground_color = \
+        (0, 0, 0, 1) if self.min_value <= int(self.text or 0) <= self.max_value else (1, 0, 0, 1)

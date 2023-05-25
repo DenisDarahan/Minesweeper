@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Any
 
 from asyncpg import Connection
 from fastapi import APIRouter, Body, Query, Depends, status
@@ -24,6 +24,6 @@ async def me(user: Annotated[User, Depends(get_current_user)]):
 
 
 @router.get('/top', status_code=status.HTTP_200_OK, dependencies=[Depends(get_current_user)],
-            response_model=list[RateRecord])
+            response_model=dict[str, Any])
 async def top(limit: int = Query(10), offset: int = Query(0)):
     return await db.rate.top(limit, offset)

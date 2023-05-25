@@ -1,0 +1,28 @@
+#:include game/gui/minesweeper/common/counter/number.kv
+
+
+<Counter>:
+    first_number: first_number
+    second_number: second_number
+    third_number: third_number
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    padding: '3dp'
+    spacing: '5dp'
+    size_hint: None, None
+    size: '91dp', '56dp'  # padding * 2 + spacing * 3
+
+    Number:
+        id: first_number
+
+    Number:
+        id: second_number
+
+    Number:
+        id: third_number

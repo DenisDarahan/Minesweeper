@@ -2,25 +2,32 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
 
+from ...common import Counter
+from ..field_config import FieldConfig
+from ..statistics import Statistics
+from ..achievements import Achievements
 from ..game_field import GameField
+from .menu_bar_button import MenuBarButton, MenuButton
 
 
 class RootWindow(BoxLayout):
-    status: Button = ObjectProperty()
+    configs: MenuBarButton = ObjectProperty()
+    mines_counter: Counter = ObjectProperty()
+    status_button: Button = ObjectProperty()
+    time_counter: Counter = ObjectProperty()
     game_field: GameField = ObjectProperty()
 
-    # def __init__(self, **kwargs):
-    #     super().__init__(**kwargs)
+    def config_field(self, _instance: MenuButton):
+        FieldConfig(self).open()
 
-    # def _start_game(self):
-    #     self.game_field = GameField(width, height, mines_amount)
+    @classmethod
+    def statistics(cls, _instance: MenuButton):
+        Statistics().open()
 
-    # def on_kv_post(self, base_widget):
-    #     self.game_field.build_game()
-
-    def fail(self):
-        # self.status.canvas.before
-        pass
+    @classmethod
+    def achievements(cls, _instance: MenuButton):
+        Achievements().open()
 
     def restart(self):
         self.game_field.build_game()
+        del self.status_button.status

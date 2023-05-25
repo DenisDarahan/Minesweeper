@@ -1,0 +1,29 @@
+<WarningLabel>:
+    size_hint: None, None
+    size: self.texture_size
+    font_size: '15sp'
+    color: 1, 0, 0, 1
+    markup: True
+
+
+<-DefaultTextInput>:
+    input_highlight: NORMAL_GRAY
+
+    canvas.before:
+        Color:
+            rgba: self.input_highlight
+        Line:
+            width: dp(2)
+            points: self.x, self.y, self.x + self.width, self.y
+        Color:
+            rgba: DARK_GRAY if self.focus else (0, 0, 0, 0)
+        Rectangle:
+            pos: self._cursor_visual_pos
+            size: dp(2), -self._cursor_visual_height
+        Color:
+            rgba:
+                self.disabled_foreground_color if self.disabled else \
+                (self.hint_text_color if not self.text else self.foreground_color)
+
+    font_size: '25sp'
+    on_focus: self.input_highlight = (DARK_GRAY if self.focus else NORMAL_GRAY)

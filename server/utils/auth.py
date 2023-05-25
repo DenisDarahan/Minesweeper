@@ -36,6 +36,15 @@ class IncorrectPasswordError(AuthError):
         self.detail = 'Incorrect password'
 
 
+class UsernameAlreadyExistsError(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status.HTTP_422_UNPROCESSABLE_ENTITY,
+            headers={'WWW-Authenticate': 'Bearer'},
+            detail='Username already exists'
+        )
+
+
 def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl='/auth/sign-in'))) -> User:
     return Auth.verify_token(token)
 

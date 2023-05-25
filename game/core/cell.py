@@ -19,13 +19,14 @@ class Cell:
     def set_mine(self):
         self.value = -1
 
+    @property
     def is_mine(self) -> bool:
         return self.value == -1
 
     def set_value(self):
         if self.value:
             return
-        self.value = len([*filter(lambda cell: cell is not None and cell.is_mine(), self.neighbours)])
+        self.value = len([*filter(lambda cell: cell is not None and cell.is_mine, self.neighbours)])
 
     def open(self) -> list[typing.Any]:
         opened_cells = [self]
@@ -34,15 +35,9 @@ class Cell:
             self.opened = True
 
             if not self.value:  # self.value == 0
-                # opened_cells.extend(self.open_neighbours())
                 opened_cells.extend(neighbour.open() for neighbour in self.neighbours)
 
         return opened_cells
-
-    # def open_neighbours(self) -> typing.Generator:
-    #     # for neighbour in self.neighbours:
-    #     #     neighbour.open()
-    #     return (neighbour.open() for neighbour in self.neighbours)
 
     def __format__(self, format_spec: str) -> str:
         return format(self.value, format_spec)

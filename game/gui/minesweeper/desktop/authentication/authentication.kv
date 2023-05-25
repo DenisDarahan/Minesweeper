@@ -1,0 +1,89 @@
+#:include game/gui/minesweeper/desktop/authentication/credentials_input.kv
+
+
+<Authentication>:
+    login_field: login_field
+    password_field: password_field
+    is_register: is_register
+
+    size_hint: None, None
+    size: '275dp', container.height + self.padding[1] + self.padding[3]
+
+    BoxLayout:
+        id: container
+        orientation: 'vertical'
+        spacing: '10dp'
+        size_hint_y: None
+        height: _header.height + _credentials_container.height + _buttons_container.height + self.spacing * 2
+
+        Label:
+            id: _header
+            size_hint_y: None
+            height: '25dp'
+            font_size: '20sp'
+            color: 0, 0, 0, 1
+            text: 'Authentication'
+
+        BoxLayout:
+            id: _credentials_container
+            orientation: 'vertical'
+            padding: '10dp', '0dp'
+            spacing: '20dp'
+            size_hint_y: None
+            height: _credentials_input_container.height + self.spacing + _register_container.height
+
+            BoxLayout:
+                id: _credentials_input_container
+                orientation: 'vertical'
+                spacing: '10dp'
+                size_hint_y: None
+                height: login_field.height + self.spacing + password_field.height
+
+                CredentialsInput:
+                    id: login_field
+                    hint_text: 'Login'
+
+                CredentialsInput:
+                    id: password_field
+                    password: True
+                    password_mask: '•'
+                    hint_text: 'Password'
+
+            BoxLayout:
+                id: _register_container
+                spacing: '5dp'
+                size_hint_y: None
+                height: '25dp'
+
+                CheckBox:
+                    id: is_register
+                    size_hint_x: None
+                    width: '20dp'
+                    on_active: if not self.active: login_field.foreground_color = (0, 0, 0, 1)
+
+                BoxLayout:
+                    RelativeLayout:
+                        Label:
+                            size_hint_x: None
+                            width: self.texture_size[0]
+                            pos_hint: {'x': 0}
+                            font_size: '17sp'
+                            color: 0, 0, 0, 1
+                            text: 'Sign up'
+
+        BoxLayout:
+            id: _buttons_container
+            size_hint_y: None
+            height: '27dp'
+            padding: '10dp', '0dp'
+            spacing: '30dp'
+
+            NormalButton:
+                font_size: '17sp'
+                text: 'Log in'
+                on_release: root.login()
+
+            NormalButton:
+                font_size: '17sp'
+                text: 'Cancel'
+                on_release: root.dismiss()

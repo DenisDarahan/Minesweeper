@@ -1,0 +1,15 @@
+<-BasePopup>:
+    _container: container
+
+    canvas.before:
+        Color:
+            rgba: LIGHT_GRAY
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(1)]
+
+    padding: '10dp'
+
+    BoxLayout:
+        id: container

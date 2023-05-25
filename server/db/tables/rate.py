@@ -1,3 +1,5 @@
+from typing import Any
+
 from asyncpg import Connection, Record
 
 from ._base_table import _BaseTable
@@ -25,17 +27,20 @@ class Rate(_BaseTable):
         'order by game_score desc'
     )
 
-    async def top(self, limit: int = 10, offset: int = 0) -> list[Record]:
+    async def top(self, limit: int = 10, offset: int = 0) -> dict[str, Any]:
         async with self.connector() as con:
-            return await con.fetch(
-                'select row_number() over (order by r.game_score desc) line_number, '
-                '    u.username, r.game_score, r.game_time '
-                'from rate r '
-                '    join "user" u on u.id = r.user_id '
-                'order by r.game_score desc '
-                'limit $1 offset $2',
-                limit, offset
-            )
+            async with con.transaction():
+                count = await con.fetchval('select count(*) from rate')
+                top = await con.fetch(
+                    'select row_number() over (order by r.game_score desc) line_number, '
+                    '    u.username, r.game_score, r.game_time '
+                    'from rate r '
+                    '    join "user" u on u.id = r.user_id '
+                    'order by r.game_score desc '
+                    'limit $1 offset $2',
+                    limit, offset
+                )
+                return {'count': count, 'top': top}
 
     @classmethod
     async def poor_create(cls, con: Connection, user_id: int, game_score: int, game_time: int) -> int:
