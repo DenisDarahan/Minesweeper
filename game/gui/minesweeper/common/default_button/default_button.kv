@@ -1,100 +1,15 @@
-#:import math math
-
-
-<DefaultButton>:
-    normal_light_color: LIGHT_GRAY
-    normal_face_color: NORMAL_GRAY
-    normal_dark_color: DARK_GRAY
-    down_light_color: DOWN_LIGHT_GRAY
-    down_face_color: DOWN_NORMAL_GRAY
-    down_dark_color: DOWN_DARK_GRAY
-
-    round_radius: math.ceil(max(self.size) / 25)
-    radius_distance: (math.sqrt(2) - 1) / math.sqrt(2) * self.round_radius
-
-    light_side: self.normal_light_color
-    dark_side: self.normal_dark_color
-    face: self.normal_face_color
+<-DefaultButton>:
+    background_normal: 'resources/default_button_normal.png'
+    background_down: 'resources/default_button_down.png'
+    state_image: self.background_normal if self.state == 'normal' else self.background_down
 
     canvas.before:
         Color:
-            rgba: self.dark_side
-        Ellipse:
-            angle_start: 135
-            angle_end: 225
-            pos: self.x, self.y
-            size: 2 * self.round_radius, 2 * self.round_radius
-        Ellipse:
-            angle_start: 45
-            angle_end: 225
-            pos: self.x + self.width - 2 * self.round_radius, self.y
-            size: 2 * self.round_radius, 2 * self.round_radius
-        Ellipse:
-            angle_start: 45
-            angle_end: 135
-            pos: self.x + self.width - 2 * self.round_radius, self.y + self.height - 2 * self.round_radius
-            size: 2 * self.round_radius, 2 * self.round_radius
-        Triangle:
-            points:
-                self.x + self.radius_distance, self.y + self.radius_distance,\
-                self.x + self.width - self.radius_distance, self.y + self.radius_distance,\
-                self.x + self.width - self.radius_distance, self.y + self.height - self.radius_distance
-        Line:
-            cap: 'none'
-            width: self.radius_distance
-            points:
-                self.x + self.round_radius, self.y + self.radius_distance, \
-                self.x + self.width - self.round_radius, self.y + self.radius_distance
-        Line:
-            cap: 'none'
-            width: self.radius_distance
-            points:
-                self.x + self.width - self.radius_distance, self.y + self.round_radius, \
-                self.x + self.width - self.radius_distance, self.y + self.height - self.round_radius
-        Color:
-            rgba: self.light_side
-        Ellipse:
-            angle_start: -45
-            angle_end: -135
-            pos: self.x, self.y
-            size: 2 * self.round_radius, 2 * self.round_radius
-        Ellipse:
-            angle_start: 45
-            angle_end: -135
-            pos: self.x, self.y + self.height - 2 * self.round_radius
-            size: 2 * self.round_radius, 2 * self.round_radius
-        Ellipse:
-            angle_start: 45
-            angle_end: -45
-            pos: self.x + self.width - 2 * self.round_radius, self.y + self.height - 2 * self.round_radius
-            size: 2 * self.round_radius, 2 * self.round_radius
-        Triangle:
-            points:
-                self.x + self.radius_distance, self.y + self.radius_distance, \
-                self.x + self.radius_distance, self.y + self.height - self.radius_distance, \
-                self.x + self.width - self.radius_distance, self.y + self.height - self.radius_distance
-        Line:
-            cap: 'none'
-            width: self.radius_distance
-            points:
-                self.x + self.radius_distance, self.y + self.round_radius, \
-                self.x + self.radius_distance, self.y + self.height - self.round_radius
-        Line:
-            cap: 'none'
-            width: self.radius_distance
-            points:
-                self.x + self.round_radius, self.y + self.height - self.radius_distance, \
-                self.x + self.width - self.round_radius, self.y + self.height - self.radius_distance
-        Color:
-            rgba: self.face
-        RoundedRectangle:
-            size: self.width * 0.8, self.height * 0.8
-            pos: self.x + self.width * 0.1, self.y + self.height * 0.1
-            radius: [self.round_radius]
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: self.state_image
 
     size_hint: None, None
     size: '20dp', '20dp'
-
-    background_color: 0, 0, 0, 0
-    background_normal: ''
-    background_down: ''

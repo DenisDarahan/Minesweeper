@@ -1,10 +1,6 @@
-import math
-
 from kivy.uix.boxlayout import BoxLayout
-from kivy.graphics import Color, Rectangle, Line, RoundedRectangle
 from kivy.input.motionevent import MotionEvent
 from kivy.properties import NumericProperty
-from kivy.metrics import dp
 
 from game.core import Cell
 from ..default_button import DefaultButton
@@ -30,62 +26,11 @@ class CellButton(DefaultButton, LongPressButton):
         self.cell = cell
 
     def display_mine(self, user_pressed: bool = False):
-        self.canvas.before.clear()
-
-        with self.canvas.after:
-            Color(rgba=((1, 0, 0, 1) if user_pressed else (0.75, 0.75, 0.75, 1)))
-            Rectangle(size=(self.width + dp(2), self.height), pos=(self.x + dp(1), self.y - dp(1)))  # background
-            Color(rgba=(0.52, 0.52, 0.52, 1))
-            Line(width=dp(1), rectangle=(self.x, self.y, self.width, self.height))  # border
-            Color(rgba=(0, 0, 0, 1))
-            Line(  # horizontal mine line
-                width=dp(1),
-                cap='square',
-                points=(self.x + self.width / 2, self.y + self.height * 0.15,
-                        self.x + self.width / 2, self.y + self.height * 0.85)
-            )
-            Line(  # vertical mine line
-                width=dp(1),
-                cap='square',
-                points=(self.x + self.width * 0.15, self.y + self.height / 2,
-                        self.x + self.width * 0.85, self.y + self.height / 2)
-            )
-            Line(  # bottom-left - top-right mine line
-                width=dp(1),
-                cap='square',
-                points=(
-                    self.x + 0.7 * self.height / (2 * math.sqrt(2)),
-                    self.y + 0.7 * self.width / (2 * math.sqrt(2)),
-                    self.x + self.width - 0.7 * self.height / (2 * math.sqrt(2)),
-                    self.y + self.height - 0.7 * self.width / (2 * math.sqrt(2))
-                )
-            )
-            Line(  # bottom-right - top-left mine line
-                width=dp(1),
-                cap='square',
-                points=(
-                    self.x + 0.7 * self.height / (2 * math.sqrt(2)),
-                    self.y + self.height - 0.7 * self.width / (2 * math.sqrt(2)),
-                    self.x + self.width - 0.7 * self.height / (2 * math.sqrt(2)),
-                    self.y + 0.7 * self.width / (2 * math.sqrt(2))
-                )
-            )
-            RoundedRectangle(  # mine circle
-                size=(self.width * 0.6, self.height * 0.6),
-                pos=(self.x + self.width * 0.2, self.y + self.height * 0.2),
-                radius=[max(self.size)]
-            )
+        self.background_normal = self.background_down = \
+            f'resources/mine_button_{"down" if user_pressed else "normal"}.png'
 
     def display_cell_value(self):
-        self.canvas.before.clear()
-
-        with self.canvas.before:
-            Color(rgba=(0.75, 0.75, 0.75, 1))
-            Rectangle(size=self.size, pos=self.pos)
-            Color(rgba=(0.52, 0.52, 0.52, 1))
-            Line(width=dp(1), rectangle=(self.x, self.y, self.width, self.height))
-
-        self.text = str(self.cell.value)
+        self.background_normal = self.background_down = f'resources/opened_cell_button_{self.cell.value}.png'
 
     def on_touch_down(self, touch: MotionEvent):
         if self.collide_point(*touch.pos):
