@@ -18,11 +18,11 @@ if platform in {'android', 'ios'}:
     VIEW_BUILD = 'mobile'
     # Builder.load_string('#:include game/gui/minesweeper/mobile/mobile.kv')
     # Window.fullscreen = True
-    # from gui.minesweeper.android_ios import RootWindow
+    # from game.gui.minesweeper.android_ios import RootWindow
 else:
     VIEW_BUILD = 'desktop'
     # Builder.load_string(f'#:include game/gui/minesweeper/desktop/desktop.kv')
-    from gui.minesweeper.desktop import RootWindow
+    from game.gui.minesweeper.desktop import RootWindow
 
     from kivy.config import Config
     Config.set('graphics', 'resizable', False)
